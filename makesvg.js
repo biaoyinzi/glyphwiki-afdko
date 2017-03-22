@@ -38,12 +38,14 @@ while((line = br.readLine()) != null){
   data = line.substring(tab + 1, line.length());
   if(data.length() > 0){
     var kage = new Kage();
+    var polygons = new Polygons();
     //kage.kUseCurve = true;
     kage.kUseCurve = false;
-    var polygons = new Polygons();
-
+    
+    try {
     kage.kBuhin.push("temp", data + "");
     kage.makeGlyph(polygons, "temp");
+    } catch(e) { continue; }
 
     fos = new java.io.FileOutputStream(dirname + "/" + code + ".svg");
     osw = new java.io.OutputStreamWriter(fos);

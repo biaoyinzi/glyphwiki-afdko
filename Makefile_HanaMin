@@ -32,7 +32,7 @@ $(BASE).map $(BASE).alias $(BASE).source: dump_all_versions.txt dump_newest_only
 
 $(BASE).svg: $(BASE).source
 	-rm -rf $(work)
-	rhino $(PROG)/makesvg.js $(BASE)
+	./rhino $(PROG)/makesvg.js $(BASE)
 	for file in $(work)/*.svg; do $(PERL) unionpoly.pl $$file; done
 	$(PERL) $(PROG)/makeSVGFont.pl $(BASE) >$(BASE).log 2>$(BASE).err
 

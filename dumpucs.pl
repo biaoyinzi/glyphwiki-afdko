@@ -271,7 +271,7 @@ sub stretch {
         $p2 = $max;
         $p4 = $max;
     }
-    return POSIX::floor((($p - $p1) / ($p2 - $p1)) * ($p4 - $p3) + $p3);
+    return $p2==$p1 ? $max : POSIX::floor((($p - $p1) / ($p2 - $p1)) * ($p4 - $p3) + $p3);
 }
 
 sub get_box {
