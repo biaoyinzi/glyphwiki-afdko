@@ -5,6 +5,8 @@
 ;; Usage ::
 ;; % emacs --script $DIR/gw-afdko.el gw000000
 
+(toggle-debug-on-error)
+
 ;; basic definitions
 (defvar gw-base      nil) ;; "HanaMinA")
 (defvar gw-file-base nil) ;;  (expand-file-name
@@ -266,6 +268,7 @@ end
          (alt           (elt feature-set 2))
          (parents-cid (gw-glyphname-to-cid parents))
          (cid         (gw-glyphname-to-cid glyphname)))
+    (message "G:%s P:%s R:%s" glyphname parents relation)
     (cond ((null feature) nil)
           ((equal feature "ivs") nil)
           ((null analysis) (message "improper glyphname %s" glyphname) nil)
@@ -476,6 +479,7 @@ end
         (let* ((first   (elt position 0))
                (second  (elt position 1))
                (kerning (elt position 2)))
+          (if (equal nil second) (setq second 0) nil)
           (insert (format "    position \\%d \\%d %d;\n"
                               first second kerning))))
       (insert "} vkrn; \n"))))

@@ -16,6 +16,13 @@ B: HanaMinB.otf
 AX: HanaMinAX.otf
 BX: HanaMinBX.otf
 
+ttf: ttfA
+
+ttfA: HanaMinA.ttf
+
+HanaMinA.ttf:
+	make -f Makefile_HanaMin sub=A spec=$(spec_A) ttf
+
 HanaMinA.otf:
 	make -f Makefile_HanaMin sub=A spec=$(spec_A) otf
 

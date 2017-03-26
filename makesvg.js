@@ -28,6 +28,14 @@ if(!dir.exists()){
   dir.mkdir();
 }
 
+function stacktrace() { 
+  function st2(f) {
+    return !f ? [] : 
+        st2(f.caller).concat([f.toString().split('(')[0].substring(9) + '(' + f.arguments.join(',') + ')']);
+  }
+  return st2(arguments.callee.caller);
+}
+
 fis = new java.io.FileInputStream("./" + target + ".source");
 isr = new java.io.InputStreamReader(fis);
 br = new java.io.BufferedReader(isr);
@@ -39,13 +47,16 @@ while((line = br.readLine()) != null){
   if(data.length() > 0){
     var kage = new Kage();
     var polygons = new Polygons();
+
+    try {
     //kage.kUseCurve = true;
     kage.kUseCurve = false;
-    
-    try {
+
     kage.kBuhin.push("temp", data + "");
     kage.makeGlyph(polygons, "temp");
-    } catch(e) { continue; }
+    } catch (e) {
+       continue; 
+    }
 
     fos = new java.io.FileOutputStream(dirname + "/" + code + ".svg");
     osw = new java.io.OutputStreamWriter(fos);

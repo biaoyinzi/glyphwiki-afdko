@@ -96,7 +96,15 @@ proof: $(BASE).proof.pdf
 
 pdf: $(BASE).pdf
 
-all: otf
+$(BASE).ttf: $(BASE).source
+	-rm -rf $(work)
+	./rhino $(PROG)/makesvg.js $(BASE)
+	emacs --script glyphwiki-symlink.el
+	python makefont.py $(sub) $(version) > log.$(sub).txt
+
+ttf: $(BASE).ttf
+
+all: otf tff
 
 clean:
 	-rm -rf $(work)
